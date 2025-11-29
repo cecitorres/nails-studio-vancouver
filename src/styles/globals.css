@@ -1,0 +1,28 @@
+/* Must be at the very top */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+/* This single import replaces @tailwind base/components/utilities */
+@import "tailwindcss"; 
+
+/* --- NEW V4 CONFIGURATION --- */
+@theme {
+  /* 1. COLORS: Defined using the --color-* namespace.
+     This generates classes like bg-primary-rose, text-primary-rose, etc.
+  */
+  --color-primary-rose: #D1B3C4;
+  --color-accent-lavender: #EDE7F6;
+  --color-dark-charcoal: #333333;
+  --color-light-gray: #f8f8f8;
+  
+  /* 2. FONTS: Defined using the --font-* namespace.
+     This generates classes like font-serif and `font-sans.
+     Note: We are overriding Tailwind's default sans/serif definitions.
+  */
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+/* --- END V4 CONFIGURATION --- */
+
+html {
+  scroll-behavior: smooth;
+}

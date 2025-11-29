@@ -1,65 +1,129 @@
-import Image from "next/image";
+// app/page.js
+"use client";
+import Header from '@/components/Header';
+import AnimatedText from '@/components/AnimatedText';
+import ServiceCard from '@/components/ServiceCard';
+import { motion } from 'framer-motion';
 
-export default function Home() {
+// Dummy Data
+const services = [
+  { icon: '✨', title: 'Signature Manicure', description: 'Classic care including shaping, cuticle work, massage, and polish application.' },
+  { icon: '🌸', title: 'Luxury Pedicure', description: 'Spa-grade foot treatment with exfoliation, mask, hot towels, and extended massage.' },
+  { icon: '🎨', title: 'Custom Nail Art', description: 'From subtle French tips to intricate hand-painted designs by our expert artists.' },
+  { icon: '🌿', title: 'Non-Toxic Gel', description: 'Long-lasting, chip-free finish using vegan and 10-free non-toxic gel products.' },
+];
+
+const galleryImages = [
+  '/images/nail-art-1.jpg', // Placeholder - add these to public/images
+  '/images/studio-shot.jpg',
+  '/images/pedicure.jpg',
+  '/images/gel-art.jpg',
+];
+
+const whatsappLink = "https://wa.me/16045551234?text=Hello%20Lumière%20Nails,%20I%20would%20like%20to%20book%20an%20appointment.";
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-light-gray font-sans">
+      <Header />
+
+      {/* === 1. Hero Section === */}
+      <section className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden" style={{ backgroundImage: "url('/images/hero-bg.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="absolute inset-0 bg-dark-charcoal/40"></div> {/* Soft Overlay */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="z-10 p-4 max-w-4xl">
+          <AnimatedText
+            text="Vancouver's Sanctuary for Flawless Nails."
+            className="text-6xl md:text-8xl font-serif font-bold text-white mb-6 leading-tight"
+          />
+          <p className="text-xl text-white/90 mb-10">
+            Find your signature style in the heart of Downtown Vancouver. Quality, elegance, and non-toxic luxury.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          <motion.a
+            href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-block px-12 py-4 bg-primary-rose text-white text-lg font-bold rounded-full shadow-2xl hover:bg-primary-rose/90 transition-all uppercase tracking-wider"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            Book via WhatsApp Now
+          </motion.a>
+        </motion.div>
+      </section>
+
+      {/* === 2. Services Overview === */}
+      <section id="services" className="py-20 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-serif font-bold text-dark-charcoal mb-4">Our Signature Offerings</h2>
+          <p className="text-gray-600 mb-12 max-w-2xl mx-auto">Elevate your nail care routine with our focused and luxurious service menu.</p>
+
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+          >
+            {services.map((service, index) => (
+              <ServiceCard key={index} {...service} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* === 3. Photo Gallery === */}
+      <section id="gallery" className="py-20 bg-light-gray">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-serif font-bold text-dark-charcoal mb-4">Artistry in Every Detail</h2>
+          <p className="text-gray-600 mb-12 max-w-2xl mx-auto">A selection of our latest work and studio ambiance.</p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {galleryImages.map((src, index) => (
+              <motion.div
+                key={index}
+                className="overflow-hidden rounded-lg shadow-md cursor-pointer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, boxShadow: '0 10px 15px rgba(0,0,0,0.1)' }}
+              >
+                {/* Use Next.js Image component in a real app */}
+                <img src={src} alt={`Nail Art ${index + 1}`} className="w-full h-full object-cover aspect-square" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* === 4. Final CTA and Footer === */}
+      <section id="contact" className="bg-dark-charcoal text-white py-16">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+          <div className="text-center md:text-left mb-8 md:mb-0">
+            <h2 className="text-3xl font-serif font-bold mb-2">Ready for a Treat?</h2>
+            <p className="text-gray-300">Book your flawless nail experience today. Vancouver awaits!</p>
+          </div>
+          <motion.a
+            href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
+            className="px-10 py-3 bg-primary-rose text-white text-lg font-bold rounded-full shadow-xl hover:bg-primary-rose/80 transition-all uppercase tracking-wider"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Documentation
-          </a>
+            Message Us to Book
+          </motion.a>
         </div>
-      </main>
+      </section>
+      
+      {/* Footer */}
+      <footer className="bg-gray-800 text-gray-400 py-8">
+        <div className="container mx-auto px-4 text-center text-sm">
+            <p className="mb-2">📍 123 Smithe St, Vancouver, BC V6B 4R8</p>
+            <p className="mb-2">Open Tue - Sat: 10:00 AM - 6:00 PM</p>
+            <p>&copy; {new Date().getFullYear()} Lumière Nails. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
