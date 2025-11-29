@@ -14,10 +14,10 @@ const services = [
 ];
 
 const galleryImages = [
-  '/images/nail-art-1.jpg', // Placeholder - add these to public/images
-  '/images/studio-shot.jpg',
-  '/images/pedicure.jpg',
-  '/images/gel-art.jpg',
+  '/images/nail-art-1.webp', // Placeholder - add these to public/images
+  '/images/studio-shot.webp',
+  '/images/pedicure.webp',
+  '/images/gel-art.webp',
 ];
 
 const whatsappLink = "https://wa.me/16045551234?text=Hello%20Lumière%20Nails,%20I%20would%20like%20to%20book%20an%20appointment.";
@@ -28,7 +28,7 @@ export default function HomePage() {
       <Header />
 
       {/* === 1. Hero Section === */}
-      <section className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden" style={{ backgroundImage: "url('/images/hero-bg.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <section className="relative h-[90vh] flex items-center justify-center text-center overflow-hidden" style={{ backgroundImage: "url('/images/hero-bg.webp')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <div className="absolute inset-0 bg-dark-charcoal/40"></div> {/* Soft Overlay */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="z-10 p-4 max-w-4xl">
           <AnimatedText
